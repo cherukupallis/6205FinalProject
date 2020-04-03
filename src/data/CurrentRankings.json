@@ -1,0 +1,102 @@
+[
+  {
+    "team": "Liverpool",
+    "games": "29",
+    "points": "82"
+  },
+  {
+    "team": "Man City",
+    "games": "28",
+    "points": "57"
+  },
+  {
+    "team": "Leicester",
+    "games": "29",
+    "points": "53"
+  },
+  {
+    "team": "Chelsea",
+    "games": "29",
+    "points": "48"
+  },
+  {
+    "team": "Man United",
+    "games": "29",
+    "points": "45"
+  },
+  {
+    "team": "Wolves",
+    "games": "29",
+    "points": "43"
+  },
+  {
+    "team": "Sheffield",
+    "games": "28",
+    "points": "43"
+  },
+  {
+    "team": "Tottenham",
+    "games": "29",
+    "points": "41"
+  },
+  {
+    "team": "Arsenal",
+    "games": "28",
+    "points": "40"
+  },
+  {
+    "team": "Burnley",
+    "games": "29",
+    "points": "39"
+  },
+  {
+    "team": "Crystal Palace",
+    "games": "29",
+    "points": "39"
+  },
+  {
+    "team": "Everton",
+    "games": "29",
+    "points": "37"
+  },
+  {
+    "team": "Newcastle",
+    "games": "29",
+    "points": "35"
+  },
+  {
+    "team": "Southampton",
+    "games": "29",
+    "points": "34"
+  },
+  {
+    "team": "Brighton",
+    "games": "29",
+    "points": "29"
+  },
+  {
+    "team": "West Ham",
+    "games": "29",
+    "points": "27"
+  },
+  {
+    "team": "Watford",
+    "games": "29",
+    "points": "27"
+  },
+  {
+    "team": "Bournemouth",
+    "games": "29",
+    "points": "27"
+  },
+  {
+    "team": "Aston Villa",
+    "games": "28",
+    "points": "25"
+  },
+  {
+    "team": "Norwich",
+    "games": "29",
+    "points": "21"
+  }
+]

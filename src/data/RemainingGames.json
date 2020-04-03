@@ -1,0 +1,362 @@
+[
+  {
+    "HomeTeam": "West Ham",
+    "AwayTeam": "Aston Villa"
+  },
+  {
+    "HomeTeam": "Southampton",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Newcastle",
+    "AwayTeam": "Liverpool"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Norwich"
+  },
+  {
+    "HomeTeam": "Leicester",
+    "AwayTeam": "Man United"
+  },
+  {
+    "HomeTeam": "Everton",
+    "AwayTeam": "Bournemouth"
+  },
+  {
+    "HomeTeam": "Crystal Palace",
+    "AwayTeam": "Tottenham"
+  },
+  {
+    "HomeTeam": "Chelsea",
+    "AwayTeam": "Wolves"
+  },
+  {
+    "HomeTeam": "Burnley",
+    "AwayTeam": "Brighton"
+  },
+  {
+    "HomeTeam": "Arsenal",
+    "AwayTeam": "Watford"
+  },
+  {
+    "HomeTeam": "Wolves",
+    "AwayTeam": "Crystal Palace"
+  },
+  {
+    "HomeTeam": "Watford",
+    "AwayTeam": "Man City"
+  },
+  {
+    "HomeTeam": "Tottenham",
+    "AwayTeam": "Leicester"
+  },
+  {
+    "HomeTeam": "Sheffield",
+    "AwayTeam": "Everton"
+  },
+  {
+    "HomeTeam": "Norwich",
+    "AwayTeam": "Burnley"
+  },
+  {
+    "HomeTeam": "Man United",
+    "AwayTeam": "West Ham"
+  },
+  {
+    "HomeTeam": "Liverpool",
+    "AwayTeam": "Chelsea"
+  },
+  {
+    "HomeTeam": "Brighton",
+    "AwayTeam": "Newcastle"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "Bouremouth",
+    "AwayTeam": "Southampton"
+  },
+  {
+    "HomeTeam": "West Ham",
+    "AwayTeam": "Watford"
+  },
+  {
+    "HomeTeam": "Southampton",
+    "AwayTeam": "Brighton"
+  },
+  {
+    "HomeTeam": "Newcastle",
+    "AwayTeam": "Tottenham"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Bouremouth"
+  },
+  {
+    "HomeTeam": "Leicester",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Everton",
+    "AwayTeam": "Aston Villa"
+  },
+  {
+    "HomeTeam": "Crystal Palace",
+    "AwayTeam": "Man United"
+  },
+  {
+    "HomeTeam": "Chelsea",
+    "AwayTeam": "Norwich"
+  },
+  {
+    "HomeTeam": "Burnley",
+    "AwayTeam": "Wolves"
+  },
+  {
+    "HomeTeam": "Arsenal",
+    "AwayTeam": "Liverpool"
+  },
+  {
+    "HomeTeam": "Wolves",
+    "AwayTeam": "Bouremouth"
+  },
+  {
+    "HomeTeam": "Wolves",
+    "AwayTeam": "Everton"
+  },
+  {
+    "HomeTeam": "Wolves",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "West Ham",
+    "AwayTeam": "Burnley"
+  },
+  {
+    "HomeTeam": "West Ham",
+    "AwayTeam": "Wolves"
+  },
+  {
+    "HomeTeam": "West Ham",
+    "AwayTeam": "Chelsea"
+  },
+  {
+    "HomeTeam": "Watford",
+    "AwayTeam": "Norwich"
+  },
+  {
+    "HomeTeam": "Watford",
+    "AwayTeam": "Leicester"
+  },
+  {
+    "HomeTeam": "Watford",
+    "AwayTeam": "Newcastle"
+  },
+  {
+    "HomeTeam": "Watford",
+    "AwayTeam": "Southampton"
+  },
+  {
+    "HomeTeam": "Tottenham",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "Tottenham",
+    "AwayTeam": "West Ham"
+  },
+  {
+    "HomeTeam": "Tottenham",
+    "AwayTeam": "Everton"
+  },
+  {
+    "HomeTeam": "Tottenham",
+    "AwayTeam": "Man United"
+  },
+  {
+    "HomeTeam": "Southampton",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "Southampton",
+    "AwayTeam": "Man City"
+  },
+  {
+    "HomeTeam": "Sheffield",
+    "AwayTeam": "Chelsea"
+  },
+  {
+    "HomeTeam": "Sheffield",
+    "AwayTeam": "Tottenham"
+  },
+  {
+    "HomeTeam": "Sheffield",
+    "AwayTeam": "Wolves"
+  },
+  {
+    "HomeTeam": "Norwich",
+    "AwayTeam": "West Ham"
+  },
+  {
+    "HomeTeam": "Norwich",
+    "AwayTeam": "Southampton"
+  },
+  {
+    "HomeTeam": "Norwich",
+    "AwayTeam": "Brighton"
+  },
+  {
+    "HomeTeam": "Norwich",
+    "AwayTeam": "Everton"
+  },
+  {
+    "HomeTeam": "Newcastle",
+    "AwayTeam": "West Ham"
+  },
+  {
+    "HomeTeam": "Newcastle",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Newcastle",
+    "AwayTeam": "Aston Villa"
+  },
+  {
+    "HomeTeam": "Man United",
+    "AwayTeam": "Bournemouth"
+  },
+  {
+    "HomeTeam": "Man United",
+    "AwayTeam": "Southampton"
+  },
+  {
+    "HomeTeam": "Man United",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Newcastle"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Burnley"
+  },
+  {
+    "HomeTeam": "Man City",
+    "AwayTeam": "Liverpool"
+  },
+  {
+    "HomeTeam": "Liverpool",
+    "AwayTeam": "Aston Villa"
+  },
+  {
+    "HomeTeam": "Liverpool",
+    "AwayTeam": "Burnley"
+  },
+  {
+    "HomeTeam": "Liverpool",
+    "AwayTeam": "Crystal Palace"
+  },
+  {
+    "HomeTeam": "Leicester",
+    "AwayTeam": "Crystal Palace"
+  },
+  {
+    "HomeTeam": "Leicester",
+    "AwayTeam": "Brighton"
+  },
+  {
+    "HomeTeam": "Everton",
+    "AwayTeam": "Southampton"
+  },
+  {
+    "HomeTeam": "Everton",
+    "AwayTeam": "Liverpool"
+  },
+  {
+    "HomeTeam": "Everton",
+    "AwayTeam": "Leicester"
+  },
+  {
+    "HomeTeam": "Chelsea",
+    "AwayTeam": "Watford"
+  },
+  {
+    "HomeTeam": "Chelsea",
+    "AwayTeam": "Man City"
+  },
+  {
+    "HomeTeam": "Burnley",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Burnley",
+    "AwayTeam": "Watford"
+  },
+  {
+    "HomeTeam": "Brighton",
+    "AwayTeam": "Man United"
+  },
+  {
+    "HomeTeam": "Brighton",
+    "AwayTeam": "Man City"
+  },
+  {
+    "HomeTeam": "Brighton",
+    "AwayTeam": "Liverpool"
+  },
+  {
+    "HomeTeam": "Brighton",
+    "AwayTeam": "Arsenal"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Sheffield"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Wolves"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Crystal Palace"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Man United"
+  },
+  {
+    "HomeTeam": "Aston Villa",
+    "AwayTeam": "Chelsea"
+  },
+  {
+    "HomeTeam": "Arsenal",
+    "AwayTeam": "Norwich"
+  },
+  {
+    "HomeTeam": "Arsenal",
+    "AwayTeam": "Leicester"
+  },
+  {
+    "HomeTeam": "Bournemouth",
+    "AwayTeam": "Newcastle"
+  },
+  {
+    "HomeTeam": "Bournemouth",
+    "AwayTeam": "Tottenham"
+  },
+  {
+    "HomeTeam": "Bournemouth",
+    "AwayTeam": "Leicester"
+  },
+  {
+    "HomeTeam": "Bournemouth",
+    "AwayTeam": "Crystal Palace"
+  }
+]
