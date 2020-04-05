@@ -10,12 +10,22 @@ import org.json.simple.parser.ParseException;
 
 public class FetchData {
 
+    final String HOMETEAM = "HomeTeam";
+    final String AWAYTEAM = "AwayTeam";
+    final String HOMETEAMGOALS = "FTHG";
+    final String AWAYTEAMGOALS = "FTAG";
+    final String CURRENTRANKINGS = "CurrentRankings";
+    final String REMAININGGAMES = "RemainingGames";
+    final String TEAM = "team";
+    final String GAMES = "games";
+    final String POINTS ="points";
+
     JSONParser jsonParser = new JSONParser();
     FileReader reader ;
 
     private  HashMap<String, ArrayList<GameResult>> dataSet = new HashMap<>();
     private  ArrayList<ArrayList<String>> remainingGames = new ArrayList<>();
-    private  HashMap<String, ArrayList<Integer>>currentStanding =  new HashMap<>();
+    private  HashMap<String,Ranking > currentStanding =  new HashMap<>();
 
     public HashMap<String, ArrayList<GameResult>> getDataSet() {
         return dataSet;
@@ -25,7 +35,7 @@ public class FetchData {
         return remainingGames;
     }
 
-    public  HashMap<String, ArrayList<Integer>> getCurrentStanding() {
+    public  HashMap<String, Ranking > getCurrentStanding() {
         return currentStanding;
     }
 
@@ -34,9 +44,9 @@ public class FetchData {
             reader = new FileReader(fileName);
             Object obj = jsonParser.parse(reader);
             JSONArray data = (JSONArray) obj;
-            if (fileName.contains("CurrentRankings"))
+            if (fileName.contains(CURRENTRANKINGS))
                 data.forEach( standing -> storeCurrentData( (JSONObject) standing ) );
-            else if (fileName.contains("RemainingGames"))
+            else if (fileName.contains(REMAININGGAMES))
                 data.forEach( matches -> storeRemainingGamesData( (JSONObject) matches ) );
             else
                 data.forEach( game -> storeGameHistoryData( (JSONObject) game ) );
@@ -46,10 +56,10 @@ public class FetchData {
     }
 
     public  void storeGameHistoryData(JSONObject game){
-        String hometeam = (String) game.get("HomeTeam");
-        String awayteam = (String) game.get("AwayTeam");
-        Long homescore = (Long) game.get("FTHG");
-        Long awayscore = (Long) game.get("FTAG") ;
+        String hometeam = (String) game.get(HOMETEAM);
+        String awayteam = (String) game.get(AWAYTEAM);
+        Long homescore = (Long) game.get(HOMETEAMGOALS);
+        Long awayscore = (Long) game.get(AWAYTEAMGOALS) ;
         GameResult gameResult = new GameResult(awayteam, (homescore- awayscore));
         if (dataSet.get(hometeam)!= null){
             dataSet.get(hometeam).add(gameResult);
@@ -61,18 +71,16 @@ public class FetchData {
     }
 
     public void storeCurrentData(JSONObject standing){
-        String team = (String) standing.get("team");
-        int games = Integer.parseInt((String)standing.get("games"));
-        int score = Integer.parseInt((String)standing.get("points"));
-        ArrayList<Integer> teamRanking= new ArrayList<>();
-        teamRanking.add(score);
-        teamRanking.add(games);
+        String team = (String) standing.get(TEAM);
+        int games = Integer.parseInt((String)standing.get(GAMES));
+        int score = Integer.parseInt((String)standing.get(POINTS));
+        Ranking teamRanking = new Ranking(team,games,score);
         currentStanding.put(team,teamRanking);
     }
 
     public void storeRemainingGamesData(JSONObject matches){
-        String homeTeam = (String) matches.get("HomeTeam");
-        String awayTeam = (String) matches.get("AwayTeam");
+        String homeTeam = (String) matches.get(HOMETEAM);
+        String awayTeam = (String) matches.get(AWAYTEAM);
         ArrayList<String> row = new ArrayList<>();
         row.add(homeTeam);
         row.add(awayTeam);
