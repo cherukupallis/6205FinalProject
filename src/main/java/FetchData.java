@@ -23,12 +23,12 @@ public class FetchData {
     JSONParser jsonParser = new JSONParser();
     FileReader reader ;
 
-    private  HashMap<String, ArrayList<GameResult>> dataSet = new HashMap<>();
+    private  HashMap<String, ArrayList<GameResult>> historyData = new HashMap<>();
     private  ArrayList<ArrayList<String>> remainingGames = new ArrayList<>();
     private  HashMap<String,Ranking > currentStanding =  new HashMap<>();
 
-    public HashMap<String, ArrayList<GameResult>> getDataSet() {
-        return dataSet;
+    public HashMap<String, ArrayList<GameResult>> getHistoryData() {
+        return historyData;
     }
 
     public ArrayList<ArrayList<String>> getRemainingGames() {
@@ -61,12 +61,12 @@ public class FetchData {
         Long homescore = (Long) game.get(HOMETEAMGOALS);
         Long awayscore = (Long) game.get(AWAYTEAMGOALS) ;
         GameResult gameResult = new GameResult(awayteam, (homescore- awayscore));
-        if (dataSet.get(hometeam)!= null){
-            dataSet.get(hometeam).add(gameResult);
+        if (historyData.get(hometeam)!= null){
+            historyData.get(hometeam).add(gameResult);
         }else{
             ArrayList<GameResult> games = new ArrayList<>();
             games.add(gameResult);
-            dataSet.put(hometeam,games);
+            historyData.put(hometeam,games);
         }
     }
 

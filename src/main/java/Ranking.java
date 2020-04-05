@@ -3,12 +3,8 @@ public class Ranking implements Comparable<Ranking> {
     Integer gamesPlayed;
     Integer score;
 
-    public void setWonScore(){
-        this.score += 3;
-    }
-
-    public void setDrawScore(){
-        this.score += 1;
+    public void setScore( int score){
+        this.score += score;
     }
 
     public void incrementGamesPlayed(){

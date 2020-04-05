@@ -3,7 +3,7 @@ import java.util.*;
 public class RankingSystem {
 
     final static String CURRENTRANKINGFILE = "src/data/CurrentRankings.json";
-    final static String RANKINGRANKINGFILE = "src/data/RemainingGames.json";
+    final static String REMAININGGAMESFILE = "src/data/RemainingGames.json";
     final static String[] fileNames = new String[]{"src/data/season0910.json","src/data/season1011.json","src/data/season1112.json",
             "src/data/season1213.json","src/data/season1314.json","src/data/season1415.json","src/data/season1516.json",
             "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
@@ -11,34 +11,34 @@ public class RankingSystem {
     public static void main(String[] args) {
 
         GamePredictor predictor = new GamePredictor();
-        FetchData data = new FetchData();
+        FetchData fetchData = new FetchData();
 
-        data.getDataFromFile(CURRENTRANKINGFILE);
-        data.getDataFromFile(RANKINGRANKINGFILE);
+        fetchData.getDataFromFile(CURRENTRANKINGFILE);
+        fetchData.getDataFromFile(REMAININGGAMESFILE);
 
         for (String file :fileNames)
-            data.getDataFromFile(file);
+            fetchData.getDataFromFile(file);
 
-        for (ArrayList<String> row : data.getRemainingGames()){
-            String TeamA = row.get(0);
-            String TeamB = row.get(1);
+        for (ArrayList<String> teamsPlaying : fetchData.getRemainingGames()){
+            String TeamA = teamsPlaying.get(0);
+            String TeamB = teamsPlaying.get(1);
             System.out.println(TeamA + " vs " + TeamB);
-            int score = predictor.getPrediction(TeamA,TeamB,data.getDataSet());
+            int score = predictor.getPrediction(TeamA,TeamB,fetchData.getHistoryData()); //replace by enum
             System.out.println("Score will be : "+score);
             if (score == 3){
-                data.getCurrentStanding().get(TeamA).setWonScore();
-            }else if (score ==1) {
-                data.getCurrentStanding().get(TeamA).setDrawScore();
-                data.getCurrentStanding().get(TeamB).setDrawScore();
+                fetchData.getCurrentStanding().get(TeamA).setScore(score);
+            }else if (score == 1) {
+                fetchData.getCurrentStanding().get(TeamA).setScore(score);
+                fetchData.getCurrentStanding().get(TeamB).setScore(score);
             } else {
-                data.getCurrentStanding().get(TeamB).setWonScore();
+                fetchData.getCurrentStanding().get(TeamB).setScore(score);
             }
-            data.getCurrentStanding().get(TeamA).incrementGamesPlayed();
-            data.getCurrentStanding().get(TeamB).incrementGamesPlayed();
+            fetchData.getCurrentStanding().get(TeamA).incrementGamesPlayed();
+            fetchData.getCurrentStanding().get(TeamB).incrementGamesPlayed();
             System.out.println();
         }
 
-        List<Ranking> teamRankings = new ArrayList<>(data.getCurrentStanding().values());
+        List<Ranking> teamRankings = new ArrayList<>(fetchData.getCurrentStanding().values()); //rethink data structure
         teamRankings.sort(Collections.reverseOrder());
         for (Ranking team : teamRankings){
             System.out.println(team.toString());
