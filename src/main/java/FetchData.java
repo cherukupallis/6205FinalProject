@@ -10,39 +10,42 @@ import org.json.simple.parser.ParseException;
 
 public class FetchData {
 
-    static class GameResult{
-        String teamName;
-        Long goalDifference;
-        GameResult( String teamName, Long goalDifference){
-            this.goalDifference = goalDifference;
-            this.teamName = teamName;
-        }
+    JSONParser jsonParser = new JSONParser();
+    FileReader reader ;
 
-        @Override
-        public String toString() {
-            return "GameResult{" +
-                    "teamName='" + teamName + '\'' +
-                    ", goalDifference=" + goalDifference +
-                    '}';
-        }
+    private  HashMap<String, ArrayList<GameResult>> dataSet = new HashMap<>();
+    private  ArrayList<ArrayList<String>> remainingGames = new ArrayList<>();
+    private  HashMap<String, ArrayList<Integer>>currentStanding =  new HashMap<>();
+
+    public HashMap<String, ArrayList<GameResult>> getDataSet() {
+        return dataSet;
     }
 
-    private static HashMap<String, ArrayList<GameResult>> dataSet = new HashMap<>();
+    public ArrayList<ArrayList<String>> getRemainingGames() {
+        return remainingGames;
+    }
 
-    public static void getData(String fileName){
-        JSONParser jsonParser = new JSONParser();
-        FileReader reader ;
+    public  HashMap<String, ArrayList<Integer>> getCurrentStanding() {
+        return currentStanding;
+    }
+
+    public void getDataFromFile(String fileName){
         try {
             reader = new FileReader(fileName);
             Object obj = jsonParser.parse(reader);
-            JSONArray gamesPlayed = (JSONArray) obj;
-            gamesPlayed.forEach( game -> storeData( (JSONObject) game ) );
+            JSONArray data = (JSONArray) obj;
+            if (fileName.contains("CurrentRankings"))
+                data.forEach( standing -> storeCurrentData( (JSONObject) standing ) );
+            else if (fileName.contains("RemainingGames"))
+                data.forEach( matches -> storeRemainingGamesData( (JSONObject) matches ) );
+            else
+                data.forEach( game -> storeGameHistoryData( (JSONObject) game ) );
         } catch (IOException | ParseException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void storeData(JSONObject game){
+    public  void storeGameHistoryData(JSONObject game){
         String hometeam = (String) game.get("HomeTeam");
         String awayteam = (String) game.get("AwayTeam");
         Long homescore = (Long) game.get("FTHG");
@@ -57,53 +60,23 @@ public class FetchData {
         }
     }
 
-    public static void printDataSet(){
-        for ( String key : dataSet.keySet()){
-            System.out.println(key + " games played " + dataSet.get(key).size() );
-            for ( GameResult game : dataSet.get(key)){
-                System.out.println(game.toString());
-            }
-            System.out.println();
-        }
+    public void storeCurrentData(JSONObject standing){
+        String team = (String) standing.get("team");
+        int games = Integer.parseInt((String)standing.get("games"));
+        int score = Integer.parseInt((String)standing.get("points"));
+        ArrayList<Integer> teamRanking= new ArrayList<>();
+        teamRanking.add(score);
+        teamRanking.add(games);
+        currentStanding.put(team,teamRanking);
     }
 
-    public static void main(String[] args) {
-        String[] fileNames = new String[]{"src/data/season0910.json","src/data/season1011.json","src/data/season1112.json",
-                "src/data/season1213.json","src/data/season1314.json","src/data/season1415.json","src/data/season1516.json",
-                "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
-
-        for (String file : fileNames){
-            getData(file);
-        }
-
-//        Everton vs Chelsea
-        int win =0;
-        int draw = 0;
-        int total = 0;
-        // home
-        for ( GameResult game : dataSet.get("Everton")){
-            if (game.teamName.equals("Liverpool")){
-                System.out.println(game.toString());
-                if (game.goalDifference> 0)
-                    win++;
-                else if( game.goalDifference == 0 )
-                    draw++;
-                total++;
-            }
-        }
-        //away
-        for ( GameResult game : dataSet.get("Liverpool")){
-            if (game.teamName.equals("Everton")){
-                System.out.println(game.toString());
-                if (game.goalDifference<  0)
-                    win++;
-                else if( game.goalDifference == 0 )
-                    draw++;
-                total ++;
-            }
-        }
-
-        System.out.println("Everton vs Liverpool \n Win % : "+ (double)win/total + " Draw % : "+ (double)draw/total
-                + " Loss % : "+ (double)(total-win-draw)/total);
+    public void storeRemainingGamesData(JSONObject matches){
+        String homeTeam = (String) matches.get("HomeTeam");
+        String awayTeam = (String) matches.get("AwayTeam");
+        ArrayList<String> row = new ArrayList<>();
+        row.add(homeTeam);
+        row.add(awayTeam);
+        getRemainingGames().add(row);
     }
+
 }
