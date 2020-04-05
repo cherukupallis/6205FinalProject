@@ -1,52 +1,47 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class RankingSystem {
 
+    final static String CURRENTRANKINGFILE = "src/data/CurrentRankings.json";
+    final static String RANKINGRANKINGFILE = "src/data/RemainingGames.json";
+    final static String[] fileNames = new String[]{"src/data/season0910.json","src/data/season1011.json","src/data/season1112.json",
+            "src/data/season1213.json","src/data/season1314.json","src/data/season1415.json","src/data/season1516.json",
+            "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
+
     public static void main(String[] args) {
-        String[] fileNames = new String[]{"src/data/season0910.json","src/data/season1011.json","src/data/season1112.json",
-                "src/data/season1213.json","src/data/season1314.json","src/data/season1415.json","src/data/season1516.json",
-                "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
+
         GamePredictor predictor = new GamePredictor();
         FetchData data = new FetchData();
 
-        data.getDataFromFile("src/data/CurrentRankings.json");
-        data.getDataFromFile("src/data/RemainingGames.json");
+        data.getDataFromFile(CURRENTRANKINGFILE);
+        data.getDataFromFile(RANKINGRANKINGFILE);
+
         for (String file :fileNames)
             data.getDataFromFile(file);
 
-//        HashMap<String,Integer> teams = new HashMap<>();
         for (ArrayList<String> row : data.getRemainingGames()){
-//            teams.merge(row.get(0),1,Integer::sum);
-//            teams.merge(row.get(1),1,Integer::sum);
-
-            System.out.println(row.get(0) + " vs " + row.get(1));
-            int score = predictor.getPrediction(row.get(0),row.get(1),data.getDataSet());
+            String TeamA = row.get(0);
+            String TeamB = row.get(1);
+            System.out.println(TeamA + " vs " + TeamB);
+            int score = predictor.getPrediction(TeamA,TeamB,data.getDataSet());
             System.out.println("Score will be : "+score);
             if (score == 3){
-                int previousScore =  data.getCurrentStanding().get(row.get(0)).get(0);
-                data.getCurrentStanding().get(row.get(0)).set(0,previousScore+3);
+                data.getCurrentStanding().get(TeamA).setWonScore();
             }else if (score ==1) {
-                int previousScoreHT =  data.getCurrentStanding().get(row.get(0)).get(0);
-                int previousScoreAT =  data.getCurrentStanding().get(row.get(1)).get(0);
-                data.getCurrentStanding().get(row.get(0)).set(0,previousScoreHT+1);
-                data.getCurrentStanding().get(row.get(1)).set(0,previousScoreAT+1);
+                data.getCurrentStanding().get(TeamA).setDrawScore();
+                data.getCurrentStanding().get(TeamB).setDrawScore();
             } else {
-                int previousScore =  data.getCurrentStanding().get(row.get(1)).get(0);
-                data.getCurrentStanding().get(row.get(1)).set(0,previousScore+3);
+                data.getCurrentStanding().get(TeamB).setWonScore();
             }
-            int matchHT =  data.getCurrentStanding().get(row.get(0)).get(1);
-            int matchAT =  data.getCurrentStanding().get(row.get(1)).get(1);
-
-            data.getCurrentStanding().get(row.get(0)).set(1,matchHT+1);
-            data.getCurrentStanding().get(row.get(1)).set(1,matchAT+1);
+            data.getCurrentStanding().get(TeamA).incrementGamesPlayed();
+            data.getCurrentStanding().get(TeamB).incrementGamesPlayed();
             System.out.println();
         }
 
-
-        for (String team : data.getCurrentStanding().keySet()){
-            System.out.println(team + " : points : " + data.getCurrentStanding().get(team).get(0)
-                    + " matches played : "+ data.getCurrentStanding().get(team).get(1) );
+        List<Ranking> teamRankings = new ArrayList<>(data.getCurrentStanding().values());
+        teamRankings.sort(Collections.reverseOrder());
+        for (Ranking team : teamRankings){
+            System.out.println(team.toString());
         }
     }
 }
