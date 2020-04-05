@@ -188,6 +188,10 @@
     "AwayTeam": "Chelsea"
   },
   {
+    "HomeTeam": "Crystal Palace",
+    "AwayTeam": "Chelsea"
+  },
+  {
     "HomeTeam": "Sheffield",
     "AwayTeam": "Tottenham"
   },
@@ -358,5 +362,9 @@
   {
     "HomeTeam": "Bournemouth",
     "AwayTeam": "Crystal Palace"
+  },
+  {
+    "HomeTeam": "Crystal Palace",
+    "AwayTeam": "Burnley"
   }
 ]
