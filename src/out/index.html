@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+    <script>
+
+        $(function() {
+            let teams = [];
+            $.getJSON('final.json', function(data) {
+                $.each(data, function(i, f) {
+                    const tblRow = "<tr>" + "<td>" + f.team + "</td>" +
+                         "<td>" + f.score + "</td>" + "<td>" + f.gamesPlayed + "</td>" +"</tr>";
+                    $(tblRow).appendTo("#userdata tbody");
+                });
+            });
+        });
+    </script>
+    <title> Ranking System </title>
+</head>
+
+<body>
+<h1>Result of the Ranking System</h1>
+<div class="wrapper">
+    <div class="profile">
+        <table id= "userdata">
+            <thead>
+                <th>Team</th>
+                <th>Score </th>
+                <th>Played</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

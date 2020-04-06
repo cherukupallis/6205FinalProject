@@ -19,10 +19,10 @@ public class Ranking implements Comparable<Ranking> {
 
     @Override
     public String toString() {
-        return "Ranking{" +
-                "team='" + team + '\'' +
-                ", gamesPlayed=" + gamesPlayed +
-                ", score=" + score +
+        return " {" +
+                "\"team\" : \"" + team + "\"," +
+                "\"gamesPlayed\" : \"" + gamesPlayed + "\"," +
+                "\"score\" : \"" + score + "\"" +
                 '}';
     }
 
