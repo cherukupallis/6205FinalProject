@@ -1,3 +1,5 @@
+package edu.neu.coe;
+
 import org.json.simple.JSONArray;
 
 import java.io.FileWriter;
@@ -6,33 +8,34 @@ import java.util.*;
 
 public class RankingSystem {
 
-    final static String CURRENTRANKINGFILE = "src/data/CurrentRankings.json";
-    final static String REMAININGGAMESFILE = "src/data/RemainingGames.json";
-    final static String[] fileNames = new String[]{"src/data/season0910.json","src/data/season1011.json","src/data/season1112.json",
-            "src/data/season1213.json","src/data/season1314.json","src/data/season1415.json","src/data/season1516.json",
-            "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
+    final static String DATASETPATH = "src/dataset/";
+    final static String CURRENTRANKINGFILE = DATASETPATH+"CurrentRankings.json";
+    final static String REMAININGGAMESFILE = DATASETPATH+ "RemainingGames.json";
+    final static String[] fileNames = new String[]{"season0910.json","season1011.json","season1112.json",
+            "season1213.json","season1314.json","season1415.json","season1516.json",
+            "season1617.json","season1718.json","season1819.json"};
     final static String OUTPUTPATH = "src/out/final.json";
 
     /**
      * Method to initialise current rankings, remaining games
      * and prepare the dataset
      *
-     * @param fetchData FetchData
+     * @param fetchData edu.neu.coe.FetchData
      */
     private static void initializeData(FetchData fetchData) {
         fetchData.getDataFromFile(CURRENTRANKINGFILE);
         fetchData.getDataFromFile(REMAININGGAMESFILE);
 
         for (String file :fileNames)
-            fetchData.getDataFromFile(file);
+            fetchData.getDataFromFile(DATASETPATH+file);
     }
 
     /**
      * Method iterates over the remaining games in the season,
      * predicts the winner and updates the current standings with the result
      *
-     * @param predictor GamePredictor
-     * @param fetchData FetchData
+     * @param predictor edu.neu.coe.GamePredictor
+     * @param fetchData edu.neu.coe.FetchData
      */
     private static void predictMatches(GamePredictor predictor, FetchData fetchData) {
         for (ArrayList<String> teamsPlaying : fetchData.getRemainingGames()){
@@ -57,8 +60,8 @@ public class RankingSystem {
 
     /**
      * Method that sorts the current standings according the score
-     * @param fetchData FetchData
-     * @return List<RankingInfo>
+     * @param fetchData edu.neu.coe.FetchData
+     * @return List<edu.neu.coe.RankingInfo>
      */
     private static List<RankingInfo> sortBasedOnScore(FetchData fetchData) {
         List<RankingInfo> teamRankings = new ArrayList<>(fetchData.getCurrentStanding().values()); //rethink data structure
@@ -72,7 +75,7 @@ public class RankingSystem {
     /**
      * Method to store the List into a file
      *
-     * @param teamRankings List<RankingInfo>
+     * @param teamRankings List<edu.neu.coe.RankingInfo>
      */
     private static void storeResult(List<RankingInfo> teamRankings) {
         JSONArray finalRanking = new JSONArray();

@@ -1,3 +1,5 @@
+package edu.neu.coe;
+
 public class RankingInfo implements Comparable<RankingInfo> {
     String team;
     Integer gamesPlayed;

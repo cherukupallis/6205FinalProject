@@ -1,3 +1,5 @@
+package edu.neu.coe;
+
 public class GameResultInfo {
 
     String teamName;
