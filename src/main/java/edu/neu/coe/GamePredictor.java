@@ -7,11 +7,11 @@ public class GamePredictor {
     int draw = 0;
     int total = 0;
 
-    HashMap<String, ArrayList<GameResult>> dataSet ;
+    HashMap<String, ArrayList<GameResultInfo>> dataSet ;
 
     public void getAwayPrediction(String awayTeam, String homeTeam){
         try {
-            for (GameResult game : dataSet.get(awayTeam)) {
+            for (GameResultInfo game : dataSet.get(awayTeam)) {
                 if (game.teamName.equals(homeTeam)) {
                     if (game.goalDifference < 0)
                         win++;
@@ -27,7 +27,7 @@ public class GamePredictor {
 
     public void getHomePrediction(String homeTeam,String awayTeam){
         try {
-            for (GameResult game : dataSet.get(homeTeam)) {
+            for (GameResultInfo game : dataSet.get(homeTeam)) {
                 if (game.teamName.equals(awayTeam)) {
                     if (game.goalDifference > 0)
                         win++;
@@ -41,7 +41,7 @@ public class GamePredictor {
         }
     }
 
-    public int getPrediction(String homeTeam, String awayTeam, HashMap<String, ArrayList<GameResult>> dataSet){
+    public int getPrediction(String homeTeam, String awayTeam, HashMap<String, ArrayList<GameResultInfo>> dataSet){
         this.dataSet = dataSet;
         win = 0;
         draw = 0 ;

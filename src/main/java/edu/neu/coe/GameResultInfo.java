@@ -1,8 +1,14 @@
-public class GameResult {
+public class GameResultInfo {
 
     String teamName;
     Long goalDifference;
-    GameResult( String teamName, Long goalDifference){
+
+    /**
+     * Constructor for class
+     * @param teamName String
+     * @param goalDifference Long
+     */
+    GameResultInfo(String teamName, Long goalDifference){
         this.goalDifference = goalDifference;
         this.teamName = teamName;
     }

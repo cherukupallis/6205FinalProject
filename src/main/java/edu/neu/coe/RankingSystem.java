@@ -13,6 +13,12 @@ public class RankingSystem {
             "src/data/season1617.json","src/data/season1718.json","src/data/season1819.json"};
     final static String OUTPUTPATH = "src/out/final.json";
 
+    /**
+     * Method to initialise current rankings, remaining games
+     * and prepare the dataset
+     *
+     * @param fetchData FetchData
+     */
     private static void initializeData(FetchData fetchData) {
         fetchData.getDataFromFile(CURRENTRANKINGFILE);
         fetchData.getDataFromFile(REMAININGGAMESFILE);
@@ -21,6 +27,13 @@ public class RankingSystem {
             fetchData.getDataFromFile(file);
     }
 
+    /**
+     * Method iterates over the remaining games in the season,
+     * predicts the winner and updates the current standings with the result
+     *
+     * @param predictor GamePredictor
+     * @param fetchData FetchData
+     */
     private static void predictMatches(GamePredictor predictor, FetchData fetchData) {
         for (ArrayList<String> teamsPlaying : fetchData.getRemainingGames()){
             String TeamA = teamsPlaying.get(0);
@@ -42,16 +55,26 @@ public class RankingSystem {
         }
     }
 
-    private static List<Ranking> sortBasedOnScore(FetchData fetchData) {
-        List<Ranking> teamRankings = new ArrayList<>(fetchData.getCurrentStanding().values()); //rethink data structure
+    /**
+     * Method that sorts the current standings according the score
+     * @param fetchData FetchData
+     * @return List<RankingInfo>
+     */
+    private static List<RankingInfo> sortBasedOnScore(FetchData fetchData) {
+        List<RankingInfo> teamRankings = new ArrayList<>(fetchData.getCurrentStanding().values()); //rethink data structure
         teamRankings.sort(Collections.reverseOrder());
-        for (Ranking team : teamRankings){
+        for (RankingInfo team : teamRankings){
             System.out.println(team.toString());
         }
         return teamRankings;
     }
 
-    private static void storeResult(List<Ranking> teamRankings) {
+    /**
+     * Method to store the List into a file
+     *
+     * @param teamRankings List<RankingInfo>
+     */
+    private static void storeResult(List<RankingInfo> teamRankings) {
         JSONArray finalRanking = new JSONArray();
         finalRanking.addAll(teamRankings);
 
@@ -72,7 +95,7 @@ public class RankingSystem {
 
         predictMatches(predictor, fetchData);
 
-        List<Ranking> teamRankings = sortBasedOnScore(fetchData);
+        List<RankingInfo> teamRankings = sortBasedOnScore(fetchData);
 
         storeResult(teamRankings);
     }

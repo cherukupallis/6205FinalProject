@@ -23,22 +23,39 @@ public class FetchData {
     JSONParser jsonParser = new JSONParser();
     FileReader reader ;
 
-    private  HashMap<String, ArrayList<GameResult>> historyData = new HashMap<>();
+    private  HashMap<String, ArrayList<GameResultInfo>> historyData = new HashMap<>();
     private  ArrayList<ArrayList<String>> remainingGames = new ArrayList<>();
-    private  HashMap<String,Ranking > currentStanding =  new HashMap<>();
+    private  HashMap<String, RankingInfo> currentStanding =  new HashMap<>();
 
-    public HashMap<String, ArrayList<GameResult>> getHistoryData() {
+    /**
+     *  Returns the historyData object
+     * @return historyData
+     */
+    public HashMap<String, ArrayList<GameResultInfo>> getHistoryData() {
         return historyData;
     }
 
+    /**
+     *  Returns the remainingGames object
+     * @return remainingGames
+     */
     public ArrayList<ArrayList<String>> getRemainingGames() {
         return remainingGames;
     }
 
-    public  HashMap<String, Ranking > getCurrentStanding() {
+    /**
+     * Returns the currentStanding object
+     * @return currentStanding
+     */
+    public  HashMap<String, RankingInfo> getCurrentStanding() {
         return currentStanding;
     }
 
+    /**
+     * Method to read data from a given filename and store
+     *
+     * @param fileName String
+     */
     public void getDataFromFile(String fileName){
         try {
             reader = new FileReader(fileName);
@@ -55,29 +72,44 @@ public class FetchData {
         }
     }
 
+    /**
+     * Method to store the game object in the history data
+     * map
+     * @param game JSONObject
+     */
     public  void storeGameHistoryData(JSONObject game){
         String hometeam = (String) game.get(HOMETEAM);
         String awayteam = (String) game.get(AWAYTEAM);
         Long homescore = (Long) game.get(HOMETEAMGOALS);
         Long awayscore = (Long) game.get(AWAYTEAMGOALS) ;
-        GameResult gameResult = new GameResult(awayteam, (homescore- awayscore));
+        GameResultInfo gameResult = new GameResultInfo(awayteam, (homescore- awayscore));
         if (historyData.get(hometeam)!= null){
             historyData.get(hometeam).add(gameResult);
         }else{
-            ArrayList<GameResult> games = new ArrayList<>();
+            ArrayList<GameResultInfo> games = new ArrayList<>();
             games.add(gameResult);
             historyData.put(hometeam,games);
         }
     }
 
+    /**
+     * Method to store the standings object in the current standing
+     * list
+     * @param standing JSONObject that contains team name, games played and score details
+     */
     public void storeCurrentData(JSONObject standing){
         String team = (String) standing.get(TEAM);
         int games = Integer.parseInt((String)standing.get(GAMES));
         int score = Integer.parseInt((String)standing.get(POINTS));
-        Ranking teamRanking = new Ranking(team,games,score);
+        RankingInfo teamRanking = new RankingInfo(team,games,score);
         currentStanding.put(team,teamRanking);
     }
 
+    /**
+     * Method to store the matches object in the remaining games
+     * map
+     * @param matches JSONObject that contains home team and away team names
+     */
     public void storeRemainingGamesData(JSONObject matches){
         String homeTeam = (String) matches.get(HOMETEAM);
         String awayTeam = (String) matches.get(AWAYTEAM);
