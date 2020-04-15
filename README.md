@@ -4,7 +4,7 @@
 ## Run Application 
 Run the below command in the terminal 
 
-`java edu.neu.coe.RankingSystem`
+`java RankingSystem`
 
 ## Result 
 
