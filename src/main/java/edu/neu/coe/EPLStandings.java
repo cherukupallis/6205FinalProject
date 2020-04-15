@@ -1,9 +1,10 @@
 package edu.neu.coe;
 
-public class RankingInfo implements Comparable<RankingInfo> {
-    String team;
-    Integer gamesPlayed;
-    Integer score;
+public class EPLStandings implements Comparable<EPLStandings> {
+
+    private String team;
+    private Integer gamesPlayed;
+    private Integer score;
 
     /**
      * Method to update the score variable
@@ -26,7 +27,7 @@ public class RankingInfo implements Comparable<RankingInfo> {
      * @param gamesPlayed int
      * @param score int
      */
-    RankingInfo(String team, int gamesPlayed, int score){
+    EPLStandings(String team, int gamesPlayed, int score){
         this.team = team;
         this.gamesPlayed = gamesPlayed;
         this.score = score;
@@ -42,7 +43,7 @@ public class RankingInfo implements Comparable<RankingInfo> {
     }
 
     @Override
-    public int compareTo(RankingInfo o) {
+    public int compareTo(EPLStandings o) {
         return this.score.compareTo(o.score);
     }
 }

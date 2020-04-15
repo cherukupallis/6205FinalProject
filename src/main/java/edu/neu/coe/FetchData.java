@@ -27,7 +27,7 @@ public class FetchData {
 
     private  HashMap<String, ArrayList<GameResultInfo>> historyData = new HashMap<>();
     private  ArrayList<ArrayList<String>> remainingGames = new ArrayList<>();
-    private  HashMap<String, RankingInfo> currentStanding =  new HashMap<>();
+    private  HashMap<String, EPLStandings> currentStanding =  new HashMap<>();
 
     /**
      *  Returns the historyData object
@@ -49,7 +49,7 @@ public class FetchData {
      * Returns the currentStanding object
      * @return currentStanding
      */
-    public  HashMap<String, RankingInfo> getCurrentStanding() {
+    public  HashMap<String, EPLStandings> getCurrentStanding() {
         return currentStanding;
     }
 
@@ -103,7 +103,7 @@ public class FetchData {
         String team = (String) standing.get(TEAM);
         int games = Integer.parseInt((String)standing.get(GAMES));
         int score = Integer.parseInt((String)standing.get(POINTS));
-        RankingInfo teamRanking = new RankingInfo(team,games,score);
+        EPLStandings teamRanking = new EPLStandings(team,games,score);
         currentStanding.put(team,teamRanking);
     }
 

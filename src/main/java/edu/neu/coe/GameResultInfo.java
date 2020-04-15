@@ -2,8 +2,17 @@ package edu.neu.coe;
 
 public class GameResultInfo {
 
-    String teamName;
-    Long goalDifference;
+    private String teamName;
+    private Long goalDifference;
+
+    // Getters
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public Long getGoalDifference() {
+        return goalDifference;
+    }
 
     /**
      * Constructor for class
