@@ -5,81 +5,42 @@ import java.util.HashMap;
 
 public class GamePredictor {
 
-    private int win =0, draw = 0, total = 0;
-    double winper, drawper, lossper;
+    public void calculateMeanSigma(RankTable homeTeam, RankTable awayTeam, HashMap<String, ArrayList<GameResultInfo>> dataSet){
+        try{
+            updateRankingTable(homeTeam, awayTeam, dataSet,false);
+            updateRankingTable(awayTeam, homeTeam, dataSet,true);
+        }catch (Exception ignored){
 
-    HashMap<String, ArrayList<GameResultInfo>> dataSet ;
-
-    /**
-     * Method to calculate the probability of team winning/losing when playing
-     * an away game
-     *
-     * @param awayTeam String
-     * @param homeTeam String
-     * @param dataSet  HashMap<String, ArrayList<GameResultInfo>>
-     * @return int
-     */
-    public int getAwayPrediction(String awayTeam, String homeTeam, HashMap<String, ArrayList<GameResultInfo>> dataSet){
-        this.dataSet = dataSet;
-        win =draw = total =0;
-        try {
-            for (GameResultInfo game : dataSet.get(awayTeam)) {
-                if (game.getTeamName().equals(homeTeam)) {
-                    if (game.getGoalDifference() < 0)
-                        win++;
-                    else if (game.getGoalDifference() == 0)
-                        draw++;
-                    total++;
-                }
-            }
-        }catch (Exception e){
-            System.out.println("No Data");
         }
-        return scoreCalculator();
     }
 
+    private void updateRankingTable(RankTable teamA, RankTable teamB, HashMap<String, ArrayList<GameResultInfo>> dataSet,boolean away) {
 
-    /**
-     * Method to calculate the score for a team
-     *
-     * @return int
-     */
-    private int scoreCalculator(){
-        winper = (double) win/total;
-        drawper = (double) draw/total;
-        lossper = (double)(total-draw-win)/total;
-        if ( winper > drawper && winper > lossper)
-            return 3;
-        if ( drawper > winper && drawper > lossper)
-            return 1;
-        return 0;
-    }
-
-    /**
-     * Method to calculate the probability of team winning/losing when playing
-     * an home game
-     *
-     * @param awayTeam String
-     * @param homeTeam String
-     * @param dataSet  HashMap<String, ArrayList<GameResultInfo>>
-     * @return int
-     */
-    public int getPrediction(String homeTeam, String awayTeam, HashMap<String, ArrayList<GameResultInfo>> dataSet){
-        this.dataSet = dataSet;
-        win =draw = total =0;
-        try {
-            for (GameResultInfo game : dataSet.get(homeTeam)) {
-                if (game.getTeamName().equals(awayTeam)) {
-                    if (game.getGoalDifference() > 0)
-                        win++;
-                    else if (game.getGoalDifference() == 0)
-                        draw++;
-                    total++;
-                }
+        ArrayList<Long> result = new ArrayList<>();
+        Long sum = 0L;
+        int noOfGames=0;
+        double ea;
+        double newrank;
+        for (GameResultInfo games : dataSet.get(teamA.getTeamName())) {
+            if (games.getTeamName().equals(teamB.getTeamName())) {
+                result.add(games.getGoalDifference());
+                sum += games.getGoalDifference();
+                noOfGames++;
             }
-        }catch (Exception e){
-            System.out.println("No Data");
         }
-        return scoreCalculator();
+        teamA.setMean((sum / noOfGames));
+        sum = 0L;
+        for (int i = 0; i < result.size(); i++) {
+            double diff = teamA.getMean() - result.get(i);
+            result.set(i, (long) (diff * diff));
+            sum += result.get(i);
+        }
+        teamA.setVariance(sum);
+        teamA.setSigma((long) Math.sqrt(sum));
+        if(away)
+            teamA.setAwayRank((double) (teamA.getSigma() - 2*teamA.getMean()));
+        else
+            teamA.setHomeRank((double) (teamA.getSigma() - 3*teamA.getMean()));
+
     }
 }

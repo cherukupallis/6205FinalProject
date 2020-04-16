@@ -96,11 +96,20 @@ public class RankingSystem {
     private static void RankTeams(HashMap<String,RankTable> rankings,GamePredictor predictor,FetchData fetchData ){
 
         for (String teamA : fetchData.getCurrentStanding().keySet()){
-            RankTable teamARanking = new RankTable(teamA);
+            RankTable teamARanking;
+            if (rankings.get(teamA)!=null)
+                teamARanking = rankings.get(teamA);
+            else
+                teamARanking = new RankTable(teamA);
             for (String teamB :fetchData.getCurrentStanding().keySet()){
                 if (!teamA.equals(teamB)){
-                    teamARanking.setHomeRank((double)predictor.getPrediction(teamA,teamB,fetchData.getHistoryData()));
-                    teamARanking.setAwayRank((double)predictor.getAwayPrediction(teamB,teamA,fetchData.getHistoryData()));
+                    RankTable teamBRanking;
+                    if (rankings.get(teamB)!=null)
+                        teamBRanking = rankings.get(teamB);
+                    else
+                        teamBRanking = new RankTable(teamB);
+                    predictor.calculateMeanSigma(teamARanking,teamBRanking,fetchData.getHistoryData());
+                    rankings.put(teamB,teamBRanking);
                 }
             }
             rankings.put(teamA,teamARanking);
