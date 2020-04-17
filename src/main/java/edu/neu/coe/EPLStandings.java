@@ -2,7 +2,7 @@ package edu.neu.coe;
 
 public class EPLStandings implements Comparable<EPLStandings> {
 
-    private String team;
+    private final String team;
     private Integer gamesPlayed;
     private Integer score;
 
