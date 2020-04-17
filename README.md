@@ -1,11 +1,12 @@
 # 6205 FinalProject
 
+This project is a Ranking System capable of predicting EPL standing based of previous match results
 
-
-## Run Application 
-Run the below command in the terminal 
-
-`java RankingSystem`
+## Run application
+ 
+After importing into a new project, run the application either by 
+* Running the main class file RankingSystem.java from /src/main/java/edu/neu/coe
+* Right click, run the jar file in the /src/output folder
 
 ## Result 
 
