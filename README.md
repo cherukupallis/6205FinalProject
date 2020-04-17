@@ -2,6 +2,8 @@
 
 This project is a Ranking System capable of predicting EPL standing based of previous match results
 
+## Author
+* Soumya Cherukupalli (NUID: 1053800)
 ## Run application
  
 After importing into a new project, run the application either by 
