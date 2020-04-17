@@ -14,7 +14,7 @@ public class RankingSystem {
     private final static String[] fileNames = new String[]{"season0910.json","season1011.json","season1112.json",
             "season1213.json","season1314.json","season1415.json","season1516.json",
             "season1617.json","season1718.json","season1819.json"};
-    private final static String OUTPUTPATH = "src/out/final.json";
+    private final static String OUTPUTPATH = "src/output/final.json";
 
 
     /**
@@ -114,14 +114,13 @@ public class RankingSystem {
             }
             rankings.put(teamA,teamARanking);
         }
-
-        System.out.println(rankings.size());
-        for(String team : rankings.keySet()){
-            System.out.println(rankings.get(team));
-        }
+//        System.out.println(rankings.size());
+//        for(String team : rankings.keySet()){
+//            System.out.println(rankings.get(team));
+//        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         GamePredictor predictor = new GamePredictor();
         FetchData fetchData = new FetchData();
