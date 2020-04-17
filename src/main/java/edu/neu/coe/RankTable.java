@@ -8,39 +8,38 @@ public class RankTable {
     Double homeRank;
     Double awayRank;
 
-    Long mean, variance, sigma;
+    Double mean, variance, sigma;
 
-    public Long getMean() {
+    public Double getMean() {
         return mean;
     }
 
-    public void setMean(Long mean) {
+    public void setMean(Double mean) {
         if (this.mean ==0 )
             this.mean = mean;
         else
             this.mean = (this.mean+mean)/2;
     }
 
-    public Long getVariance() {
+    public Double getVariance() {
         return variance;
     }
 
-    public void setVariance(Long variance) {
+    public void setVariance(Double variance) {
         if (this.variance == 0)
             this.variance = variance;
-        else
-            this.variance += variance;
     }
 
-    public Long getSigma() {
+    public Double getSigma() {
         return sigma;
     }
 
-    public void setSigma(Long sigma) {
+    public void setSigma(Double sigma) {
         if (this.sigma == 0){
             this.sigma = sigma;
         }else{
-            this.sigma = (long) Math.sqrt(this.variance);
+            this.sigma = Math.sqrt(this.variance*this.variance + sigma*sigma);
+            this.variance= sigma;
         }
 
     }
@@ -53,9 +52,9 @@ public class RankTable {
         this.teamName = teamName;
         this.homeRank = (double) 0;
         this.awayRank = (double) 0;
-        this.mean = (long)0;
-        this.variance = (long)0;
-        this.sigma = (long)0;
+        this.mean = (double)0;
+        this.variance = (double)0;
+        this.sigma = (double)0;
     }
 
     // Getter and setter
@@ -81,10 +80,13 @@ public class RankTable {
 
     @Override
     public String toString() {
-        return "RankTable {" +
+        return "RankTable{" +
                 "teamName='" + teamName + '\'' +
-                ", homeRank=" + homeRank+
-                ", awayRank=" + awayRank+
+                ", homeRank=" + homeRank +
+                ", awayRank=" + awayRank +
+                ", mean=" + mean +
+                ", variance=" + variance +
+                ", sigma=" + sigma +
                 '}';
     }
 

@@ -24,23 +24,31 @@ public class GamePredictor {
         for (GameResultInfo games : dataSet.get(teamA.getTeamName())) {
             if (games.getTeamName().equals(teamB.getTeamName())) {
                 result.add(games.getGoalDifference());
+                if(away){
+                    ea = 1/(1+Math.pow(10, (teamA.getAwayRank()-teamB.getHomeRank())/400));
+                    newrank = teamA.getAwayRank() + 2*(games.getGoalDifference()-ea);
+                }else{
+                    ea = 1/(1+Math.pow(10, (teamA.getHomeRank()-teamB.getAwayRank())/400));
+                    newrank = teamA.getHomeRank() + 2*(games.getGoalDifference()-ea);
+                }
+                teamA.setHomeRank(newrank);
                 sum += games.getGoalDifference();
                 noOfGames++;
             }
         }
-        teamA.setMean((sum / noOfGames));
+        teamA.setMean((double) (sum / noOfGames));
         sum = 0L;
         for (int i = 0; i < result.size(); i++) {
             double diff = teamA.getMean() - result.get(i);
             result.set(i, (long) (diff * diff));
             sum += result.get(i);
         }
-        teamA.setVariance(sum);
-        teamA.setSigma((long) Math.sqrt(sum));
+        teamA.setVariance((double)sum);
+        teamA.setSigma((double)sum);
         if(away)
-            teamA.setAwayRank((double) (teamA.getSigma() - 2*teamA.getMean()));
+            teamA.setAwayRank((teamA.getSigma() - 3*teamA.getMean()));
         else
-            teamA.setHomeRank((double) (teamA.getSigma() - 3*teamA.getMean()));
+            teamA.setHomeRank((teamA.getSigma() - 3*teamA.getMean()));
 
     }
 }

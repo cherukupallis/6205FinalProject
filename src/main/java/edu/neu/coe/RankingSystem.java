@@ -114,10 +114,6 @@ public class RankingSystem {
             }
             rankings.put(teamA,teamARanking);
         }
-//        System.out.println(rankings.size());
-//        for(String team : rankings.keySet()){
-//            System.out.println(rankings.get(team));
-//        }
     }
 
     public static void main(String[] args) throws IOException {
